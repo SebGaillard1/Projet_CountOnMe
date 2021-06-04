@@ -103,9 +103,7 @@
 				57729800266A217D006886E1 /* View */,
 				577297FF266A2175006886E1 /* Controller */,
 				1FA43BD2224E569900F565CB /* AppDelegate.swift */,
-				1FA43BD6224E569900F565CB /* Main.storyboard */,
 				1FA43BD9224E569A00F565CB /* Assets.xcassets */,
-				1FA43BDB224E569A00F565CB /* LaunchScreen.storyboard */,
 				1FA43BDE224E569A00F565CB /* Info.plist */,
 			);
 			path = CountOnMe;
@@ -140,6 +138,8 @@
 		57729800266A217D006886E1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1FA43BD6224E569900F565CB /* Main.storyboard */,
+				1FA43BDB224E569A00F565CB /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";

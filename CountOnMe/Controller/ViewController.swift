@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         }
         
         // Create local copy of operations
-        let newOperation = Operation(operations: elements)
+        let newOperation = AnOperation(operations: elements)
         
         textView.text.append(" = \(newOperation.getResult())")
     }

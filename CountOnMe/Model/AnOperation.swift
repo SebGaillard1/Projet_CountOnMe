@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Operation {
+class AnOperation {
     
     private var operationsToReduce: [String]
   

@@ -1,16 +1,16 @@
 //
-//  SimpleCalcTests.swift
-//  SimpleCalcTests
+//  CountOnMeTests.swift
+//  CountOnMeTests
 //
-//  Created by Vincent Saluzzo on 29/03/2019.
-//  Copyright © 2019 Vincent Saluzzo. All rights reserved.
+//  Created by Sebastien Gaillard on 04/06/2021.
+//  Copyright © 2021 Vincent Saluzzo. All rights reserved.
 //
 
 import XCTest
 @testable import CountOnMe
 
-class SimpleCalcTests: XCTestCase {
-
+class CountOnMeTests: XCTestCase {
+    
     func testGiven15_WhenAdding5_ThenResultShouldBe20() {
         let newOperation = AnOperation(operations: ["15", "+", "5"])
         XCTAssertEqual(newOperation.getResult(), "20")

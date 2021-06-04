@@ -14,6 +14,10 @@ class SimpleCalcTests: XCTestCase {
     override func setUp() {
         
     }
+    
+    func testGivenLastElementIsANumber_WhenAddingOperator_ThenShouldAcceptIt() {
+        
+    }
 
 
 }

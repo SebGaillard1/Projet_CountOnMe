@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Brain {
+class Operation {
     
     private var operationsToReduce: [String]
   
@@ -28,6 +28,8 @@ class Brain {
                 switch operand {
                 case "+": result = left + right
                 case "-": result = left - right
+                case "X": result = left * right
+                case "%": result = left / right
                 default: fatalError("Unknown operator !")
                 }
                 

@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     // Error check computed variables
     var expressionIsCorrect: Bool {
-        return elements.last != "+" && elements.last != "-"
+        return elements.last != "+" && elements.last != "-" && elements.last != "X" && elements.last != "%"
     }
     
     var expressionHaveEnoughElement: Bool {
@@ -53,19 +53,9 @@ class ViewController: UIViewController {
         textView.text.append(numberText)
     }
     
-    @IBAction func tappedAdditionButton(_ sender: UIButton) {
+    @IBAction func tappedOperationButton(_ sender: UIButton) {
         if canAddOperator {
-            textView.text.append(" + ")
-        } else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
-            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-            self.present(alertVC, animated: true, completion: nil)
-        }
-    }
-    
-    @IBAction func tappedSubstractionButton(_ sender: UIButton) {
-        if canAddOperator {
-            textView.text.append(" - ")
+            textView.text.append(" \(sender.title(for: .normal)!) ")
         } else {
             let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -87,9 +77,9 @@ class ViewController: UIViewController {
         }
         
         // Create local copy of operations
-        var brain = Brain(operations: elements)
+        let newOperation = Operation(operations: elements)
         
-        textView.text.append(" = \(brain.getResult())")
+        textView.text.append(" = \(newOperation.getResult())")
     }
 
 }

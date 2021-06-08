@@ -22,37 +22,53 @@ class CountOnMeUITests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-        
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
     
-    func testDeux() throws {
+    func testAddition() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
         
-        app/*@START_MENU_TOKEN@*/.staticTexts["2"]/*[[".buttons[\"2\"].staticTexts[\"2\"]",".staticTexts[\"2\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["+"]/*[[".buttons[\"+\"].staticTexts[\"+\"]",".staticTexts[\"+\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let textView = app.textViews["calculatorTextView"]
+        
+        app.buttons["1"].tap()
+        app.buttons["2"].tap()
+        app.buttons["3"].tap()
+        app.buttons["4"].tap()
+        app.buttons["5"].tap()
         app.buttons["6"].tap()
-        app/*@START_MENU_TOKEN@*/.staticTexts["="]/*[[".buttons[\"=\"].staticTexts[\"=\"]",".staticTexts[\"=\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-        app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element.tap()
+        app.buttons["7"].tap()
+        app.buttons["8"].tap()
+        app.buttons["9"].tap()
+        app.buttons["0"].tap()
+        app.buttons["+"].tap()
+        app.buttons["5"].tap()
+        app.buttons["="].tap()
         
+        XCTAssertTrue(textView.value as! String == "1234567890 + 5 = 1234567895")
+
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    func testAllOperationTypes() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let textView = app.textViews["calculatorTextView"]
+        
+        app.buttons["1"].tap()
+        app.buttons["0"].tap()
+        app.buttons["0"].tap()
+        app.buttons["+"].tap()
+        app.buttons["2"].tap()
+        app.buttons["%"].tap()
+        app.buttons["3"].tap()
+        app.buttons["X"].tap()
+        app.buttons["4"].tap()
+        app.buttons["-"].tap()
+        app.buttons["6"].tap()
+        app.buttons["="].tap()
+        
+        XCTAssertTrue(textView.value as! String == "100 + 2 % 3 X 4 - 6 = 130")
     }
 }

@@ -25,7 +25,6 @@ class ViewController: UIViewController {
         calculator.elements = elements
     }
     
-    
     // View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         guard let numberText = sender.title(for: .normal) else {
@@ -49,6 +48,14 @@ class ViewController: UIViewController {
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alertVC, animated: true, completion: nil)
         }
+        
+        if calculator.expressionHaveResult {
+            textView.text = ""
+            calculator.elements = elements
+            let alertVC = UIAlertController(title: "Zéro!", message: "Vous ne pouvez pas calculer depuis le resultat, veuillez refaire un calcul !", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(alertVC, animated: true, completion: nil)
+        }
     }
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
@@ -64,11 +71,7 @@ class ViewController: UIViewController {
             return self.present(alertVC, animated: true, completion: nil)
         }
         
-        // Create local copy of operations
-        
-        
         textView.text.append(" = \(calculator.performOperation())")
     }
-
 }
 

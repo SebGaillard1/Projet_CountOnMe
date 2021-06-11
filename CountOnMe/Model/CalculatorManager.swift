@@ -35,31 +35,41 @@ class CalculatorManager {
         return false
     }
     
+    var indexOfDivision: Int? {
+        return elements.firstIndex(of: "%")
+    }
+    
+    func validDivision() -> Bool {
+        if indexOfDivision != nil {
+            if elements[indexOfDivision! + 1] == "0" {
+                return false
+            }
+        }
+        return true
+    }
+    
     func performOperation() -> String {
         // Iterate over operations while an operand still here
         var operationsToReduce = elements
         
-        if expressionIsCorrect && expressionHaveEnoughElement {
-            while operationsToReduce.count > 1 {
-                let left = Int(operationsToReduce[0])!
-                let operand = operationsToReduce[1]
-                let right = Int(operationsToReduce[2])!
-                
-                let result: Int
-                switch operand {
-                case "+": result = left + right
-                case "-": result = left - right
-                case "X": result = left * right
-                case "%": result = left / right
-                default: fatalError("Unknown operator !")
-                }
-                
-                operationsToReduce = Array(operationsToReduce.dropFirst(3))
-                operationsToReduce.insert("\(result)", at: 0)
-                
+        while operationsToReduce.count > 1 {
+            let left = Int(operationsToReduce[0])!
+            let operand = operationsToReduce[1]
+            let right = Int(operationsToReduce[2])!
+            
+            let result: Int
+            switch operand {
+            case "+": result = left + right
+            case "-": result = left - right
+            case "X": result = left * right
+            case "%": result = left / right
+            default: fatalError("Unknown operator !")
             }
-            return operationsToReduce.first ?? "Error"
+            
+            operationsToReduce = Array(operationsToReduce.dropFirst(3))
+            operationsToReduce.insert("\(result)", at: 0)
+            
         }
-        return "Error"
+        return operationsToReduce.first ?? "Error"
     }
 }

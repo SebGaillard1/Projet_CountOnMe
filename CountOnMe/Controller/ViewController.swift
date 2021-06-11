@@ -71,6 +71,14 @@ class ViewController: UIViewController {
             return self.present(alertVC, animated: true, completion: nil)
         }
         
+        guard calculator.validDivision() else {
+            textView.text = ""
+            calculator.elements = elements
+            let alertVC = UIAlertController(title: "Erreur!", message: "Vous ne pouvez pas diviser par zéro !", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            return self.present(alertVC, animated: true, completion: nil)
+        }
+        
         textView.text.append(" = \(calculator.performOperation())")
     }
 }

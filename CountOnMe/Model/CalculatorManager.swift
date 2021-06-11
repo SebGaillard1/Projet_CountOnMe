@@ -41,7 +41,7 @@ class CalculatorManager {
     
     func validDivision() -> Bool {
         if indexOfDivision != nil {
-            if elements[indexOfDivision! + 1] == "0" {
+            if Int(elements[indexOfDivision! + 1]) == 0 { // En Int car si l'utilisateur divise par 0 ou 00 ou 000 etc.. Problème potentiel en String
                 return false
             }
         }

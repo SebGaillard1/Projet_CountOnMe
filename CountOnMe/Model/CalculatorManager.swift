@@ -8,17 +8,38 @@
 
 import Foundation
 
-class AnOperation {
+class CalculatorManager {
     
-    private var operationsToReduce: [String]
-  
-    init(operations: [String]) {
-        operationsToReduce = operations
-        performOperation()
+    var elements: [String] = []
+    
+    // Error check computed variables
+    var expressionIsCorrect: Bool {
+        return elements.last != "+" && elements.last != "-" && elements.last != "X" && elements.last != "%"
     }
     
-    private func performOperation() {
+    var expressionHaveEnoughElement: Bool {
+        return elements.count >= 3
+    }
+    
+    var canAddOperator: Bool {
+        return elements.last != "+" && elements.last != "-" && elements.last != "X" && elements.last != "%" 
+    }
+    
+    var expressionHaveResult: Bool {
+        for element in elements {
+            if element.contains("=") {
+                elements.removeAll()
+                return true
+            }
+        }
+        return false
+    }
+    
+    func performOperation() -> String {
         // Iterate over operations while an operand still here
+        var operationsToReduce = elements
+        
+        if expressionIsCorrect && expressionHaveEnoughElement {
             while operationsToReduce.count > 1 {
                 let left = Int(operationsToReduce[0])!
                 let operand = operationsToReduce[1]
@@ -35,10 +56,10 @@ class AnOperation {
                 
                 operationsToReduce = Array(operationsToReduce.dropFirst(3))
                 operationsToReduce.insert("\(result)", at: 0)
+                
             }
-    }
-    
-    func getResult() -> String {
-        return operationsToReduce.first!
+            return operationsToReduce.first ?? "Error"
+        }
+        return "Error"
     }
 }

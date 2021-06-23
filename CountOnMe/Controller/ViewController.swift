@@ -23,6 +23,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         calculator.elements = elements
+        
+        for button in numberButtons {
+            button.layer.cornerRadius = 5
+        }
     }
     
     // View actions
@@ -57,6 +61,12 @@ class ViewController: UIViewController {
             self.present(alertVC, animated: true, completion: nil)
         }
     }
+    
+    @IBAction func acTapped(_ sender: UIButton) {
+        textView.text = ""
+        calculator.elements = elements
+    }
+    
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard calculator.expressionIsCorrect else {

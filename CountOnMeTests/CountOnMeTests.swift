@@ -29,8 +29,12 @@ class CountOnMeTests: XCTestCase {
         XCTAssertFalse(calculator.canAddOperator)
     }
     
+    func testGivenANumber_WhenTryingDoDivideByZero_ThenShouldNotBeAValidDivision() {
+        calculator.elements = ["50", "%", "0"]
+        XCTAssertFalse(calculator.validDivision())
+    }
     
-    func testGivenOk_WhenOK_ThenOK() {
+    func testGiven3_WhenMinus1_ThenResultShouldBe2() {
         calculator.elements = ["3", "-", "1"]
         XCTAssertEqual(calculator.performOperation(), "2")
     }

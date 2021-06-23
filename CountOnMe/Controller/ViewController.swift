@@ -54,11 +54,16 @@ class ViewController: UIViewController {
             textView.text.append(" \(sender.title(for: .normal)!) ")
             calculator.currentOperation = elements
         } else {
+            if sender.title(for: .normal) != "-" {
             let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alertVC, animated: true, completion: nil)
+            } else {
+                textView.text.append(" \(sender.title(for: .normal)!) ")
+                calculator.currentOperation = elements
+            }
         }
-
+        
         if calculator.expressionHaveResult {
             textView.text = "\(calculator.allOperations.last!)"
             textView.text.append(" \(sender.title(for: .normal)!) ")
@@ -71,7 +76,7 @@ class ViewController: UIViewController {
         calculator.currentOperation = elements
     }
     
-
+    
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard calculator.expressionIsCorrect else {
             let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)

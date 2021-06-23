@@ -17,14 +17,13 @@ class CountOnMeTests: XCTestCase {
         calculator = CalculatorManager()
     }
         
-    func testGiven3Minus_WhenAddingMinusAgain_ThenShouldFail() {
+    func testGiven3Minus_WhenAddingMinusAgain_ThenExpressionShouldBeIncorrect() {
         calculator.currentOperation = ["3", "-", "-"]
         XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
     }
     
     func testGiven3_WhenAddingMinus_ThenCanAddOperatorShouldBeTrue() {
         calculator.currentOperation = ["3"]
-        XCTAssertTrue(calculator.expressionIsCorrectAndCanAddOperator)
         calculator.currentOperation.append("-")
         XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
     }
@@ -32,6 +31,30 @@ class CountOnMeTests: XCTestCase {
     func testGivenANumber_WhenTryingDoDivideByZero_ThenShouldNotBeAValidDivision() {
         calculator.currentOperation = ["50", "%", "0"]
         XCTAssertFalse(calculator.validDivision())
+    }
+    
+    func testGivenANumber_WhenDividingByANumberDifferentOfZero_ThenShouldBeAValidDivision() {
+        calculator.currentOperation = ["50", "%", "2"]
+        XCTAssertTrue(calculator.validDivision())
+    }
+    
+    func testGivenFirstElementIsMinus_WhenANumberIsChoosen_ThenShouldBeTreatedAsANegativeNumberWhilePerformingTheOperation() {
+        calculator.currentOperation = ["-", "5", "X", "-", "6"]
+        XCTAssertEqual(calculator.performOperation(), "30")
+    }
+    
+    func testGivenzzerze_Wheneztrrze_Thenezrze() {
+        calculator.currentOperation = ["X"]
+        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
+        calculator.currentOperation = ["%"]
+        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
+        calculator.currentOperation = []
+        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
+    }
+    
+    func testGiven3Minus5_WhenCheckingForResult_ThenShouldBeFalse() {
+        calculator.currentOperation = ["3","-","5"]
+        XCTAssertFalse(calculator.expressionHaveResult)
     }
     
     func testGiven3_WhenMinus1_ThenResultShouldBe2() {

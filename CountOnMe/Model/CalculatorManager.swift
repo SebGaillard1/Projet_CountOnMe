@@ -10,20 +10,16 @@ import Foundation
 
 class CalculatorManager {
     
-    var allOperations = [String]()
+    var results = [String]()
     var currentOperation = [String]()
     
-    // Error check computed variables
-    var expressionIsCorrect: Bool {
-        return currentOperation.last != "+" && currentOperation.last != "-" && currentOperation.last != "X" && currentOperation.last != "%"
+    // Error check computed variable
+    var expressionIsCorrectAndCanAddOperator: Bool {
+        return currentOperation.last != "+" && currentOperation.last != "-" && currentOperation.last != "X" && currentOperation.last != "%" && !currentOperation.isEmpty
     }
     
     var expressionHaveEnoughElement: Bool {
         return currentOperation.count >= 3
-    }
-    
-    var canAddOperator: Bool {
-        return currentOperation.last != "+" && currentOperation.last != "-" && currentOperation.last != "X" && currentOperation.last != "%"
     }
     
     var expressionHaveResult: Bool {
@@ -86,8 +82,7 @@ class CalculatorManager {
             operationsToReduce.insert("\(result)", at: 0)
             
         }
-        allOperations.append(contentsOf: operationsToReduce)
-        print(allOperations)
+        results.append(contentsOf: operationsToReduce)
         return operationsToReduce.first ?? "Error"
     }
 }

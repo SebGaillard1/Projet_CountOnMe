@@ -19,14 +19,14 @@ class CountOnMeTests: XCTestCase {
         
     func testGiven3Minus_WhenAddingMinusAgain_ThenShouldFail() {
         calculator.currentOperation = ["3", "-", "-"]
-        XCTAssertFalse(calculator.expressionIsCorrect)
+        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
     }
     
     func testGiven3_WhenAddingMinus_ThenCanAddOperatorShouldBeTrue() {
         calculator.currentOperation = ["3"]
-        XCTAssertTrue(calculator.canAddOperator)
+        XCTAssertTrue(calculator.expressionIsCorrectAndCanAddOperator)
         calculator.currentOperation.append("-")
-        XCTAssertFalse(calculator.canAddOperator)
+        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
     }
     
     func testGivenANumber_WhenTryingDoDivideByZero_ThenShouldNotBeAValidDivision() {

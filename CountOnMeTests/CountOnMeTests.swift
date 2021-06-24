@@ -16,17 +16,6 @@ class CountOnMeTests: XCTestCase {
         super.setUp()
         calculator = CalculatorManager()
     }
-        
-    func testGiven3Minus_WhenAddingMinusAgain_ThenExpressionShouldBeIncorrect() {
-        calculator.currentOperation = ["3", "-", "-"]
-        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
-    }
-    
-    func testGiven3_WhenAddingMinus_ThenCanAddOperatorShouldBeTrue() {
-        calculator.currentOperation = ["3"]
-        calculator.currentOperation.append("-")
-        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
-    }
     
     func testGivenANumber_WhenTryingDoDivideByZero_ThenShouldNotBeAValidDivision() {
         calculator.currentOperation = ["50", "%", "0"]
@@ -43,11 +32,25 @@ class CountOnMeTests: XCTestCase {
         XCTAssertEqual(calculator.performOperation(), "30")
     }
     
-    func testGivenzzerze_Wheneztrrze_Thenezrze() {
-        calculator.currentOperation = ["x"]
+    func testGivenAnOperationWhichLastElementIsAnOperator_WhenCheckingCanAddOperator_ThenShouldBeFalse() {
+        calculator.currentOperation = ["10", "-", "5", "x"]
         XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
-        calculator.currentOperation = ["%"]
+        
+        calculator.currentOperation.removeLast()
+        calculator.currentOperation.append("%")
         XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
+        
+        calculator.currentOperation.removeLast()
+        calculator.currentOperation.append("-")
+        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
+    }
+    
+    func testGiven3Minus_WhenAddingMinusAgain_ThenExpressionShouldBeIncorrect() {
+        calculator.currentOperation = ["3", "-", "-"]
+        XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
+    }
+    
+    func testGivenCurrentOperationIsEmpty_WhenCheckCanAddOperator_ThenShouldBeFalse() {
         calculator.currentOperation = []
         XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
     }
@@ -62,9 +65,13 @@ class CountOnMeTests: XCTestCase {
         XCTAssertEqual(calculator.performOperation(), "2")
     }
     
-    func testGivenEnoughElements_WhenAddingEqual_ThenShouldReturnTrue() {
-        calculator.currentOperation = ["3", "-", "1", "="]
+    func testGivenACompleteOperation_WhenCheckingEnoughtElement_ThenShouldHaveEnough() {
+        calculator.currentOperation = ["3", "-", "1"]
         XCTAssertTrue(calculator.expressionHaveEnoughElement)
+    }
+    
+    func testGivenAnOperation_WhenAddingEqual_ThenExpressionShouldHaveResult() {
+        calculator.currentOperation = ["3", "-", "1", "="]
         XCTAssertTrue(calculator.expressionHaveResult())
     }
     

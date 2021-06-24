@@ -15,14 +15,15 @@ class CalculatorManager {
     
     // Error check computed variable
     var expressionIsCorrectAndCanAddOperator: Bool {
-        return currentOperation.last != "+" && currentOperation.last != "-" && currentOperation.last != "X" && currentOperation.last != "%" && !currentOperation.isEmpty
+        return currentOperation.last != "+" && currentOperation.last != "-" && currentOperation.last != "x" && currentOperation.last != "%" && !currentOperation.isEmpty
     }
     
     var expressionHaveEnoughElement: Bool {
         return currentOperation.count >= 3
     }
     
-    var expressionHaveResult: Bool {
+    // Check if an operation has been done
+    func expressionHaveResult() -> Bool {
         for element in currentOperation {
             if element.contains("=") {
                 currentOperation.removeAll()
@@ -32,20 +33,18 @@ class CalculatorManager {
         return false
     }
     
-    private var indexOfDivision: Int? {
-        return currentOperation.firstIndex(of: "%")
-    }
-    
+    // Check if user is trying to divide by zero
     func validDivision() -> Bool {
-        if indexOfDivision != nil {
-            if Int(currentOperation[indexOfDivision! + 1]) == 0 { // En Int car si l'utilisateur divise par 0 ou 00 ou 000 etc.. Problème potentiel en String
+        if let indexOfDivision = currentOperation.firstIndex(of: "%") {
+            if Int(currentOperation[indexOfDivision + 1]) == 0 { // En Int car si l'utilisateur divise par 0 ou 00 ou 000 etc.. Problème potentiel en String
                 return false
             }
         }
         return true
     }
     
-    func treatNegativeNumbers() {
+    // Detect if user want to use negative number
+    private func treatNegativeNumbers() {
         if currentOperation[0] == "-" {
             currentOperation[0] += currentOperation[1]
             currentOperation.remove(at: 1)
@@ -57,8 +56,8 @@ class CalculatorManager {
         }
     }
     
+    // Perform the operation. Return the result
     func performOperation() -> String {
-        // Iterate over operations while an operand still here
         treatNegativeNumbers()
         
         var operationsToReduce = currentOperation
@@ -73,7 +72,7 @@ class CalculatorManager {
             switch operand {
             case "+": result = left + right
             case "-": result = left - right
-            case "X": result = left * right
+            case "x": result = left * right
             case "%": result = left / right
             default: fatalError("Unknown operator !")
             }

@@ -63,12 +63,12 @@ class CountOnMeUITests: XCTestCase {
         app.buttons["2"].tap()
         app.buttons["%"].tap()
         app.buttons["3"].tap()
-        app.buttons["X"].tap()
+        app.buttons["x"].tap()
         app.buttons["4"].tap()
         app.buttons["-"].tap()
         app.buttons["6"].tap()
         app.buttons["="].tap()
         
-        XCTAssertTrue(textView.value as! String == "100 + 2 % 3 X 4 - 6 = 130")
+        XCTAssertTrue(textView.value as! String == "100 + 2 % 3 x 4 - 6 = 130")
     }
 }

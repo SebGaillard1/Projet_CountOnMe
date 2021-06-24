@@ -39,12 +39,12 @@ class CountOnMeTests: XCTestCase {
     }
     
     func testGivenFirstElementIsMinus_WhenANumberIsChoosen_ThenShouldBeTreatedAsANegativeNumberWhilePerformingTheOperation() {
-        calculator.currentOperation = ["-", "5", "X", "-", "6"]
+        calculator.currentOperation = ["-", "5", "x", "-", "6"]
         XCTAssertEqual(calculator.performOperation(), "30")
     }
     
     func testGivenzzerze_Wheneztrrze_Thenezrze() {
-        calculator.currentOperation = ["X"]
+        calculator.currentOperation = ["x"]
         XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
         calculator.currentOperation = ["%"]
         XCTAssertFalse(calculator.expressionIsCorrectAndCanAddOperator)
@@ -54,7 +54,7 @@ class CountOnMeTests: XCTestCase {
     
     func testGiven3Minus5_WhenCheckingForResult_ThenShouldBeFalse() {
         calculator.currentOperation = ["3","-","5"]
-        XCTAssertFalse(calculator.expressionHaveResult)
+        XCTAssertFalse(calculator.expressionHaveResult())
     }
     
     func testGiven3_WhenMinus1_ThenResultShouldBe2() {
@@ -65,7 +65,7 @@ class CountOnMeTests: XCTestCase {
     func testGivenEnoughElements_WhenAddingEqual_ThenShouldReturnTrue() {
         calculator.currentOperation = ["3", "-", "1", "="]
         XCTAssertTrue(calculator.expressionHaveEnoughElement)
-        XCTAssertTrue(calculator.expressionHaveResult)
+        XCTAssertTrue(calculator.expressionHaveResult())
     }
     
         func testGiven15_WhenAdding5_ThenResultShouldBe20() {
@@ -79,7 +79,7 @@ class CountOnMeTests: XCTestCase {
         }
     
         func testGiven15_WhenMultiplyingBy5_ThenResultShouldBe35() {
-            calculator.currentOperation = ["15", "X", "5"]
+            calculator.currentOperation = ["15", "x", "5"]
             XCTAssertEqual(calculator.performOperation(), "75")
         }
     

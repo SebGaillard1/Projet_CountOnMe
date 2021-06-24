@@ -8,41 +8,42 @@
 import UIKit
 
 class ViewController: UIViewController {
+    //MARK: - IBOultets
     @IBOutlet weak var textView: UITextView!
     @IBOutlet var circleButtons: [UIButton]!
     @IBOutlet var rectangleButtons: [UIButton]!
-    
-    var formatedTextView: [String] {
+   
+    //MARK: - Variable
+    private var formatedTextView: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
     }
     
-    var calculator = CalculatorManager()
+    private var calculator = CalculatorManager()
     
-    // View Life cycles
+    //MARK: - View life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
         calculator.results.append("2")
         calculator.currentOperation = formatedTextView
         
         for button in circleButtons {
-            button.layer.cornerRadius = button.bounds.size.width / 2
+            button.layer.cornerRadius = button.bounds.size.width / 3
         }
         
         for button in rectangleButtons {
-            button.layer.cornerRadius = button.bounds.size.height / 2
-            //button.layer.masksToBounds = true
+            button.layer.cornerRadius = button.bounds.size.height / 3
         }
     }
     
-    // View actions
+    //MARK: - IBActions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         guard let numberText = sender.title(for: .normal) else {
             return
         }
-        calculator.currentOperation = formatedTextView
-        
-        if calculator.expressionHaveResult {
+
+        // Si il y a déjà un calcul, on fait de la place pour les nouveaux calculs
+        if calculator.expressionHaveResult() {
             textView.text = ""
         }
         textView.text.append(numberText)
@@ -55,7 +56,7 @@ class ViewController: UIViewController {
             calculator.currentOperation = formatedTextView
         } else {
             if sender.title(for: .normal) != "-" {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Ajout impossible", message: "Vous ne pouvez pas ajouter cet operateur !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             self.present(alertVC, animated: true, completion: nil)
             } else {
@@ -70,7 +71,8 @@ class ViewController: UIViewController {
             }
         }
         
-        if calculator.expressionHaveResult {
+        // Dans le cas ou l'utilisateur veux effectuer un calcul depuis le resultat précedent
+        if calculator.expressionHaveResult() {
             textView.text = "\(calculator.results.last!)"
             textView.text.append(" \(sender.title(for: .normal)!) ")
             calculator.currentOperation = formatedTextView
@@ -79,13 +81,12 @@ class ViewController: UIViewController {
     
     @IBAction func acTapped(_ sender: UIButton) {
         textView.text = ""
-        calculator.currentOperation = formatedTextView
+        calculator.currentOperation.removeAll()
     }
-    
     
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard calculator.expressionIsCorrectAndCanAddOperator else {
-            let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Incorrect!", message: "Entrez une expression correcte !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             return self.present(alertVC, animated: true, completion: nil)
         }
@@ -98,7 +99,7 @@ class ViewController: UIViewController {
         
         guard calculator.validDivision() else {
             textView.text = ""
-            calculator.currentOperation = formatedTextView
+            calculator.currentOperation.removeAll()
             let alertVC = UIAlertController(title: "Erreur!", message: "Vous ne pouvez pas diviser par zéro !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             return self.present(alertVC, animated: true, completion: nil)

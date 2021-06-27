@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         guard let numberText = sender.title(for: .normal) else {
             return
         }
-
         // Si il y a déjà un calcul, on fait de la place pour les nouveaux calculs
         if calculator.expressionHaveResult() {
             textView.text = ""
@@ -101,6 +100,7 @@ class ViewController: UIViewController {
         }
         
         textView.text.append(" = \(calculator.performOperation())")
+        calculator.currentOperation = formatedTextView
     }
 }
 

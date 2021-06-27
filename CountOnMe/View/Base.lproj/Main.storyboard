@@ -225,7 +225,7 @@
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="acTapped:" destination="eqK-jh-KKu" eventType="touchUpInside" id="dcY-X4-ZRg"/>
+                                    <action selector="tappedACButton:" destination="eqK-jh-KKu" eventType="touchUpInside" id="dcY-X4-ZRg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -256,22 +256,22 @@
                     </view>
                     <connections>
                         <outlet property="textView" destination="T2H-yn-nBB" id="yqe-Yo-Sag"/>
-                        <outletCollection property="circleButtons" destination="Raa-av-x4n" collectionClass="NSMutableArray" id="P52-Zx-bMS"/>
-                        <outletCollection property="circleButtons" destination="jd7-ld-hSU" collectionClass="NSMutableArray" id="U3Z-si-yYe"/>
-                        <outletCollection property="circleButtons" destination="UDN-zf-T0y" collectionClass="NSMutableArray" id="EsS-4s-VvX"/>
-                        <outletCollection property="circleButtons" destination="tMJ-tH-k5u" collectionClass="NSMutableArray" id="bHm-EG-hSS"/>
-                        <outletCollection property="circleButtons" destination="lad-SR-mqj" collectionClass="NSMutableArray" id="0dq-6F-JO8"/>
-                        <outletCollection property="circleButtons" destination="S66-ub-JAX" collectionClass="NSMutableArray" id="2lv-EY-kZ4"/>
-                        <outletCollection property="circleButtons" destination="W04-n1-Wen" collectionClass="NSMutableArray" id="F9G-eA-4ij"/>
-                        <outletCollection property="circleButtons" destination="EPx-3X-zTa" collectionClass="NSMutableArray" id="tmM-9D-IHt"/>
-                        <outletCollection property="circleButtons" destination="Hkr-13-i1X" collectionClass="NSMutableArray" id="Cn1-3U-qap"/>
-                        <outletCollection property="circleButtons" destination="qMj-Of-bCU" collectionClass="NSMutableArray" id="vd8-On-cXb"/>
-                        <outletCollection property="circleButtons" destination="DQU-P5-55X" collectionClass="NSMutableArray" id="zaR-CQ-1dM"/>
-                        <outletCollection property="circleButtons" destination="3zr-HC-0N9" collectionClass="NSMutableArray" id="XXR-Iu-6RT"/>
-                        <outletCollection property="circleButtons" destination="R8E-iK-yfA" collectionClass="NSMutableArray" id="ngj-Bj-0Se"/>
-                        <outletCollection property="circleButtons" destination="TD8-vg-2mf" collectionClass="NSMutableArray" id="sIC-tM-XqF"/>
-                        <outletCollection property="rectangleButtons" destination="p4C-aK-9v2" collectionClass="NSMutableArray" id="Os8-jr-Q9L"/>
-                        <outletCollection property="rectangleButtons" destination="YD6-ul-r3f" collectionClass="NSMutableArray" id="glC-pI-5zx"/>
+                        <outletCollection property="allButtons" destination="Raa-av-x4n" collectionClass="NSMutableArray" id="P52-Zx-bMS"/>
+                        <outletCollection property="allButtons" destination="jd7-ld-hSU" collectionClass="NSMutableArray" id="U3Z-si-yYe"/>
+                        <outletCollection property="allButtons" destination="UDN-zf-T0y" collectionClass="NSMutableArray" id="EsS-4s-VvX"/>
+                        <outletCollection property="allButtons" destination="tMJ-tH-k5u" collectionClass="NSMutableArray" id="bHm-EG-hSS"/>
+                        <outletCollection property="allButtons" destination="lad-SR-mqj" collectionClass="NSMutableArray" id="0dq-6F-JO8"/>
+                        <outletCollection property="allButtons" destination="S66-ub-JAX" collectionClass="NSMutableArray" id="2lv-EY-kZ4"/>
+                        <outletCollection property="allButtons" destination="W04-n1-Wen" collectionClass="NSMutableArray" id="F9G-eA-4ij"/>
+                        <outletCollection property="allButtons" destination="EPx-3X-zTa" collectionClass="NSMutableArray" id="tmM-9D-IHt"/>
+                        <outletCollection property="allButtons" destination="Hkr-13-i1X" collectionClass="NSMutableArray" id="Cn1-3U-qap"/>
+                        <outletCollection property="allButtons" destination="qMj-Of-bCU" collectionClass="NSMutableArray" id="vd8-On-cXb"/>
+                        <outletCollection property="allButtons" destination="DQU-P5-55X" collectionClass="NSMutableArray" id="zaR-CQ-1dM"/>
+                        <outletCollection property="allButtons" destination="3zr-HC-0N9" collectionClass="NSMutableArray" id="XXR-Iu-6RT"/>
+                        <outletCollection property="allButtons" destination="R8E-iK-yfA" collectionClass="NSMutableArray" id="ngj-Bj-0Se"/>
+                        <outletCollection property="allButtons" destination="TD8-vg-2mf" collectionClass="NSMutableArray" id="sIC-tM-XqF"/>
+                        <outletCollection property="allButtons" destination="p4C-aK-9v2" collectionClass="NSMutableArray" id="HrT-cp-vcv"/>
+                        <outletCollection property="allButtons" destination="YD6-ul-r3f" collectionClass="NSMutableArray" id="zo4-8Q-VUf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7XP-3c-sJZ" sceneMemberID="firstResponder"/>

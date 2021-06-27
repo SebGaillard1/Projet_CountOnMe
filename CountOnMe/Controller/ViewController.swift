@@ -10,9 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     //MARK: - IBOultets
     @IBOutlet weak var textView: UITextView!
-    @IBOutlet var circleButtons: [UIButton]!
-    @IBOutlet var rectangleButtons: [UIButton]!
-   
+    @IBOutlet var allButtons: [UIButton]!
+    
     //MARK: - Variable
     private var formatedTextView: [String] {
         return textView.text.split(separator: " ").map { "\($0)" }
@@ -27,11 +26,7 @@ class ViewController: UIViewController {
         calculator.results.append("2")
         calculator.currentOperation = formatedTextView
         
-        for button in circleButtons {
-            button.layer.cornerRadius = button.bounds.size.width / 3
-        }
-        
-        for button in rectangleButtons {
+        for button in allButtons {
             button.layer.cornerRadius = button.bounds.size.height / 3
         }
     }
@@ -79,7 +74,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func acTapped(_ sender: UIButton) {
+    @IBAction func tappedACButton(_ sender: UIButton) {
         textView.text = ""
         calculator.currentOperation.removeAll()
     }

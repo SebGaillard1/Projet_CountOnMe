@@ -12,6 +12,7 @@ class CalculatorManager {
     
     var results = [String]()
     var currentOperation = [String]()
+    private var operationsToReduce = [String]()
     
     // Error check computed variable
     var expressionIsCorrectAndCanAddOperator: Bool {
@@ -56,16 +57,28 @@ class CalculatorManager {
         }
     }
     
+    private func getIndexOfFirstPrioOperand() -> Int {
+        for element in operationsToReduce {
+            if element == "x" || element == "%" {
+                return operationsToReduce.firstIndex(of: element)!
+            }
+        }
+        return 1
+    }
+    
+    
     // Perform the operation. Return the result
     func performOperation() -> String {
         treatNegativeNumbers()
-        
-        var operationsToReduce = currentOperation
+
+        operationsToReduce = currentOperation
         
         while operationsToReduce.count > 1 {
-            let left = Double(operationsToReduce[0])!
-            let operand = operationsToReduce[1]
-            let right = Double(operationsToReduce[2])!
+            let indexOfOperation = getIndexOfFirstPrioOperand()
+            
+            let left = Double(operationsToReduce[indexOfOperation - 1])!
+            let operand = operationsToReduce[indexOfOperation]
+            let right = Double(operationsToReduce[indexOfOperation + 1])!
             
             var result: Double
             
@@ -77,10 +90,8 @@ class CalculatorManager {
             default: fatalError("Unknown operator !")
             }
             
-            result = Double(round(100*result)/100)
-
-            operationsToReduce = Array(operationsToReduce.dropFirst(3))
-            operationsToReduce.insert("\(result)", at: 0)
+            operationsToReduce.removeSubrange(indexOfOperation-1...indexOfOperation+1)
+            operationsToReduce.insert("\(result)", at: indexOfOperation - 1)
             
         }
         results.append(contentsOf: operationsToReduce)

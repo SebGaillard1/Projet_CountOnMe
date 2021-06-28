@@ -58,9 +58,9 @@ class CalculatorManager {
     }
     
     private func getIndexOfFirstPrioOperand() -> Int {
-        for element in operationsToReduce {
+        for element in currentOperation {
             if element == "x" || element == "%" {
-                return operationsToReduce.firstIndex(of: element)!
+                return currentOperation.firstIndex(of: element)!
             }
         }
         return 1
@@ -70,15 +70,13 @@ class CalculatorManager {
     // Perform the operation. Return the result
     func performOperation() -> String {
         treatNegativeNumbers()
-
-        operationsToReduce = currentOperation
         
-        while operationsToReduce.count > 1 {
+        while currentOperation.count > 1 {
             let indexOfOperation = getIndexOfFirstPrioOperand()
             
-            let left = Double(operationsToReduce[indexOfOperation - 1])!
-            let operand = operationsToReduce[indexOfOperation]
-            let right = Double(operationsToReduce[indexOfOperation + 1])!
+            let left = Double(currentOperation[indexOfOperation - 1])!
+            let operand = currentOperation[indexOfOperation]
+            let right = Double(currentOperation[indexOfOperation + 1])!
             
             var result: Double
             
@@ -90,11 +88,11 @@ class CalculatorManager {
             default: fatalError("Unknown operator !")
             }
             
-            operationsToReduce.removeSubrange(indexOfOperation-1...indexOfOperation+1)
-            operationsToReduce.insert("\(result)", at: indexOfOperation - 1)
+            currentOperation.removeSubrange(indexOfOperation-1...indexOfOperation+1)
+            currentOperation.insert("\(result)", at: indexOfOperation - 1)
             
         }
-        results.append(contentsOf: operationsToReduce)
-        return operationsToReduce.first ?? "Error"
+        results.append(contentsOf: currentOperation)
+        return currentOperation.first ?? "Error"
     }
 }

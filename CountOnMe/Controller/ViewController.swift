@@ -41,12 +41,14 @@ class ViewController: UIViewController {
             textView.text = ""
         }
         textView.text.append(numberText)
+        scrollToBottom()
         calculator.currentOperation = formatedTextView
     }
     
     @IBAction func tappedOperationButton(_ sender: UIButton) {
         if calculator.expressionIsCorrectAndCanAddOperator {
             textView.text.append(" \(sender.title(for: .normal)!) ")
+            scrollToBottom()
             calculator.currentOperation = formatedTextView
         } else {
             if sender.title(for: .normal) != "-" {
@@ -56,6 +58,7 @@ class ViewController: UIViewController {
             } else {
                 if calculator.currentOperation.last != "-" {
                 textView.text.append(" \(sender.title(for: .normal)!) ")
+                scrollToBottom()
                 calculator.currentOperation = formatedTextView
                 } else {
                     let alertVC = UIAlertController(title: "Saisie invalide !", message: "Vous avez déjà saisi un moins !", preferredStyle: .alert)
@@ -100,7 +103,13 @@ class ViewController: UIViewController {
         }
         
         textView.text.append(" = \(calculator.performOperation())")
+        scrollToBottom()
         calculator.currentOperation = formatedTextView
+    }
+    
+    private func scrollToBottom() {
+        let range = NSRange(location: textView.text.count - 1, length: 0)
+        textView.scrollRangeToVisible(range)
     }
 }
 

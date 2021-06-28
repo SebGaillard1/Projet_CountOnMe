@@ -12,7 +12,6 @@ class CalculatorManager {
     
     var results = [String]()
     var currentOperation = [String]()
-    private var operationsToReduce = [String]()
     
     // Error check computed variable
     var expressionIsCorrectAndCanAddOperator: Bool {

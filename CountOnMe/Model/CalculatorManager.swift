@@ -63,11 +63,11 @@ class CalculatorManager {
         var operationsToReduce = currentOperation
         
         while operationsToReduce.count > 1 {
-            let left = Int(operationsToReduce[0])!
+            let left = Double(operationsToReduce[0])!
             let operand = operationsToReduce[1]
-            let right = Int(operationsToReduce[2])!
+            let right = Double(operationsToReduce[2])!
             
-            let result: Int
+            var result: Double
             
             switch operand {
             case "+": result = left + right
@@ -77,6 +77,8 @@ class CalculatorManager {
             default: fatalError("Unknown operator !")
             }
             
+            result = Double(round(100*result)/100)
+
             operationsToReduce = Array(operationsToReduce.dropFirst(3))
             operationsToReduce.insert("\(result)", at: 0)
             

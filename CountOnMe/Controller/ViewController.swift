@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     //MARK: - IBOultets
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet var textView: UITextView!
     @IBOutlet var allButtons: [UIButton]!
     
     //MARK: - Variable
@@ -98,6 +98,14 @@ class ViewController: UIViewController {
             textView.text = ""
             calculator.currentOperation.removeAll()
             let alertVC = UIAlertController(title: "Erreur!", message: "Vous ne pouvez pas diviser par zéro !", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            return self.present(alertVC, animated: true, completion: nil)
+        }
+        
+        guard !calculator.expressionHaveResult() else {
+            textView.text = ""
+            calculator.currentOperation.removeAll()
+            let alertVC = UIAlertController(title: "Déjà calculé!", message: "Vous avez déjà calculé !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             return self.present(alertVC, animated: true, completion: nil)
         }

@@ -9,19 +9,21 @@
 import Foundation
 
 class CalculatorManager {
-    
     var results = [String]()
     var currentOperation = [String]()
     
-    // Error check computed variable
+    //MARK: - Error check computed variable
+    // Return true if the operation is correct and if the user can add an operator
     var expressionIsCorrectAndCanAddOperator: Bool {
         return currentOperation.last != "+" && currentOperation.last != "-" && currentOperation.last != "x" && currentOperation.last != "%" && !currentOperation.isEmpty
     }
     
+    // An operation should have 3 elements min
     var expressionHaveEnoughElement: Bool {
         return currentOperation.count >= 3
     }
     
+    //MARK: - Error check functions
     // Check if an operation has been done
     func expressionHaveResult() -> Bool {
         for element in currentOperation {
@@ -43,19 +45,22 @@ class CalculatorManager {
         return true
     }
     
+    //MARK: - Prepare calculation functions
     // Detect if user want to use negative number
     private func treatNegativeNumbers() {
-        if currentOperation[0] == "-" {
-            currentOperation[0] += currentOperation[1]
-            currentOperation.remove(at: 1)
-        }
-        
-        if currentOperation[2] == "-" {
-            currentOperation[2] += currentOperation[3]
-            currentOperation.remove(at: 3)
+        for index in stride(from: 0, to: currentOperation.count, by: 2){
+            if index < currentOperation.count {
+                if currentOperation[index] == "-" {
+                    currentOperation[index] += currentOperation[index+1]
+                    currentOperation.remove(at: index+1)
+                }
+            } else {
+                return
+            }
         }
     }
     
+    // Return the index of the operand with the highest priority. If they're all the same priority, return 1 so it's left to right
     private func getIndexOfFirstPrioOperand() -> Int {
         for element in currentOperation {
             if element == "x" || element == "%" {
@@ -64,7 +69,6 @@ class CalculatorManager {
         }
         return 1
     }
-    
     
     // Perform the operation. Return the result
     func performOperation() -> String {
@@ -86,6 +90,8 @@ class CalculatorManager {
             case "%": result = left / right
             default: fatalError("Unknown operator !")
             }
+            
+            result = Double(round(100*result)/100)
             
             currentOperation.removeSubrange(indexOfOperation-1...indexOfOperation+1)
             currentOperation.insert("\(result)", at: indexOfOperation - 1)

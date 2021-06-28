@@ -29,7 +29,7 @@ class CountOnMeTests: XCTestCase {
     
     func testGivenFirstElementIsMinus_WhenANumberIsChoosen_ThenShouldBeTreatedAsANegativeNumberWhilePerformingTheOperation() {
         calculator.currentOperation = ["-", "5", "x", "-", "6"]
-        XCTAssertEqual(calculator.performOperation(), "30")
+        XCTAssertEqual(calculator.performOperation(), "30.0")
     }
     
     func testGivenAnOperationWhichLastElementIsAnOperator_WhenCheckingCanAddOperator_ThenShouldBeFalse() {
@@ -62,7 +62,7 @@ class CountOnMeTests: XCTestCase {
     
     func testGiven3_WhenMinus1_ThenResultShouldBe2() {
         calculator.currentOperation = ["3", "-", "1"]
-        XCTAssertEqual(calculator.performOperation(), "2")
+        XCTAssertEqual(calculator.performOperation(), "2.0")
     }
     
     func testGivenACompleteOperation_WhenCheckingEnoughtElement_ThenShouldHaveEnough() {
@@ -77,22 +77,22 @@ class CountOnMeTests: XCTestCase {
     
         func testGiven15_WhenAdding5_ThenResultShouldBe20() {
             calculator.currentOperation = ["15", "+", "5"]
-            XCTAssertEqual(calculator.performOperation(), "20")
+            XCTAssertEqual(calculator.performOperation(), "20.0")
         }
     
         func testGiven15_WhenSubstracting5_ThenResultShouldBe10() {
             calculator.currentOperation = ["15", "-", "5"]
-            XCTAssertEqual(calculator.performOperation(), "10")
+            XCTAssertEqual(calculator.performOperation(), "10.0")
         }
     
         func testGiven15_WhenMultiplyingBy5_ThenResultShouldBe35() {
             calculator.currentOperation = ["15", "x", "5"]
-            XCTAssertEqual(calculator.performOperation(), "75")
+            XCTAssertEqual(calculator.performOperation(), "75.0")
         }
     
         func testGiven15_WhenDividingBy5_ThenResultShouldBe3() {
             calculator.currentOperation = ["15", "%", "5"]
-            XCTAssertEqual(calculator.performOperation(), "3")
+            XCTAssertEqual(calculator.performOperation(), "3.0")
         }
     
     

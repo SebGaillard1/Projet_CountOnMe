@@ -72,6 +72,7 @@ class ViewController: UIViewController {
         if calculator.expressionHaveResult() {
             textView.text = "\(calculator.results.last!)"
             textView.text.append(" \(sender.title(for: .normal)!) ")
+            textView.text = textView.text.replacingOccurrences(of: ".0 ", with: " ")
             calculator.currentOperation = formatedTextView
         }
     }
@@ -111,6 +112,7 @@ class ViewController: UIViewController {
         }
         
         textView.text.append(" = \(calculator.performOperation())")
+        textView.text = textView.text.replacingOccurrences(of: ".0", with: "", options: .anchored, range: Range(NSMakeRange(textView.text.count - 2, 2), in: textView.text))
         scrollToBottom()
         calculator.currentOperation = formatedTextView
     }

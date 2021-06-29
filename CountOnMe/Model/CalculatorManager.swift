@@ -90,14 +90,16 @@ class CalculatorManager {
             case "%": result = left / right
             default: fatalError("Unknown operator !")
             }
-            
-            result = Double(round(100*result)/100)
-            
+                        
             currentOperation.removeSubrange(indexOfOperation-1...indexOfOperation+1)
             currentOperation.insert("\(result)", at: indexOfOperation - 1)
             
         }
-        results.append(contentsOf: currentOperation)
-        return currentOperation.first ?? "Error"
+        
+        guard let resultDouble = Double(currentOperation.first!) else { return "Error" }
+        let resultRoundedString = String(Double(round(100*resultDouble)/100))
+        
+        results.append(resultRoundedString)
+        return resultRoundedString
     }
 }

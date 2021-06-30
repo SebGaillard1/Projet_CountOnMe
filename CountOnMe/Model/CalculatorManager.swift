@@ -37,9 +37,15 @@ class CalculatorManager {
     
     // Check if user is trying to divide by zero
     func validDivision() -> Bool {
-        if let indexOfDivision = currentOperation.firstIndex(of: "%") {
-            if Int(currentOperation[indexOfDivision + 1]) == 0 { // En Int car si l'utilisateur divise par 0 ou 00 ou 000 etc.. Problème potentiel en String
-                return false
+        var currentOperationCopy = currentOperation
+        
+        for _ in currentOperationCopy {
+            if let indexOfDivision = currentOperationCopy.firstIndex(of: "%") {
+                if Int(currentOperationCopy[indexOfDivision + 1]) == 0 { // En Int car si l'utilisateur divise par 0 ou 00 ou 000 etc.. Problème potentiel en String
+                    return false
+                } else {
+                    currentOperationCopy.remove(at: indexOfDivision)
+                }
             }
         }
         return true

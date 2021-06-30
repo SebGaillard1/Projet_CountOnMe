@@ -101,6 +101,7 @@ class CalculatorManager {
         }
         
         guard let resultDouble = Double(currentOperation.first!) else { return "Error" }
+        
         let resultRoundedString = String(Double(round(100*resultDouble)/100))
         
         results.append(resultRoundedString)

@@ -54,8 +54,6 @@ class CalculatorManager {
                     currentOperation[index] += currentOperation[index+1]
                     currentOperation.remove(at: index+1)
                 }
-            } else {
-                return
             }
         }
     }

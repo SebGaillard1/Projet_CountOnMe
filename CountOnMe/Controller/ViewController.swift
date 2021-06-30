@@ -10,7 +10,6 @@ import UIKit
 class ViewController: UIViewController {
     //MARK: - IBOultets
     @IBOutlet var textView: UITextView!
-    @IBOutlet var allButtons: [UIButton]!
     
     //MARK: - Variable
     private var formatedTextView: [String] {
@@ -23,12 +22,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        calculator.results.append("2")
+        calculator.results.append("0")
         calculator.currentOperation = formatedTextView
-        
-        for button in allButtons {
-            button.layer.cornerRadius = button.bounds.size.height / 3
-        }
     }
     
     //MARK: - IBActions
@@ -38,6 +33,8 @@ class ViewController: UIViewController {
         }
         // Si il y a déjà un calcul, on fait de la place pour les nouveaux calculs
         if calculator.expressionHaveResult() {
+            textView.text = ""
+        } else if textView.text == "0" {
             textView.text = ""
         }
         textView.text.append(numberText)
@@ -78,7 +75,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedACButton(_ sender: UIButton) {
-        textView.text = ""
+        textView.text = "0"
         calculator.currentOperation.removeAll()
     }
     
@@ -96,7 +93,7 @@ class ViewController: UIViewController {
         }
         
         guard calculator.validDivision() else {
-            textView.text = ""
+            textView.text = "0"
             calculator.currentOperation.removeAll()
             let alertVC = UIAlertController(title: "Erreur!", message: "Vous ne pouvez pas diviser par zéro !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -104,7 +101,7 @@ class ViewController: UIViewController {
         }
         
         guard !calculator.expressionHaveResult() else {
-            textView.text = ""
+            textView.text = "0"
             calculator.currentOperation.removeAll()
             let alertVC = UIAlertController(title: "Déjà calculé!", message: "Vous avez déjà calculé !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
